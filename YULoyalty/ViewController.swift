@@ -9,17 +9,45 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    let reviewManager = ReviewManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        YULoyalty.instance.configure(currentLoyalty: 1, currentLevel: .starter)
+        YULoyalty.instance.levelAchievedBlock = { level in
+            print("Level Achived: \(level)")
+            self.reviewManager.complitionBlock = { answer in
+                switch answer {
+                case .yes:
+                    self.reviewManager.askForReview(parentVC: self)
+                case .no:
+                    YULoyalty.instance.incrementLoyalty(weight: .dontLikeApp)
+                case .cancel:
+                    YULoyalty.instance.incrementLoyalty(weight: .askLater)
+                }
+            }
+            
+        }
+        YULoyalty.instance.syncCurrentStateBlock = { loyalty, level in
+            print("Sync Cyrrent Loyalty: \(loyalty) Level: \(level)")
+        }
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func buttonDidTapped(_ sender: UIButton) {
+        guard let title = sender.titleLabel?.text else { return }
+        switch title {
+        case "Start App":
+            YULoyalty.instance.incrementLoyalty(weight: .startApp)
+        case "Bookmark":
+            YULoyalty.instance.incrementLoyalty(weight: .bookmarkArticle)
+        case "Crash App":
+            YULoyalty.instance.incrementLoyalty(weight: .crashedApp)
+        default:
+            return
+        }
     }
-
+    
 
 }
 
