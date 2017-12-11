@@ -18,6 +18,7 @@
 
 /* Begin PBXFileReference section */
 		5EAE43F31FDA8DF100F6FBFE /* ReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewManager.swift; sourceTree = "<group>"; };
+		5EAE43F51FDAB3FB00F6FBFE /* YULoyalty-Swift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YULoyalty-Swift.h"; sourceTree = "<group>"; };
 		5EF8E46B1FD6F73F00BE1332 /* YULoyalty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YULoyalty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EF8E46E1FD6F73F00BE1332 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5EF8E4701FD6F73F00BE1332 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -66,6 +67,7 @@
 				5EF8E47A1FD6F74000BE1332 /* Info.plist */,
 				5EF8E4801FD6F77700BE1332 /* YULoyalty.swift */,
 				5EAE43F31FDA8DF100F6FBFE /* ReviewManager.swift */,
+				5EAE43F51FDAB3FB00F6FBFE /* YULoyalty-Swift.h */,
 			);
 			path = YULoyalty;
 			sourceTree = "<group>";

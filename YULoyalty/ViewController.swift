@@ -10,27 +10,30 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let reviewManager = ReviewManager()
+    let reviewManager = ReviewManager(appID:"123456")
 
     override func viewDidLoad() {
         super.viewDidLoad()
         YULoyalty.instance.configure(currentLoyalty: 1, currentLevel: .starter)
         YULoyalty.instance.levelAchievedBlock = { level in
-            print("Level Achived: \(level)")
+            print("Level Achived: \(level.text)")
+            // Save current loyalty point and current level in db or settings or something else here
             self.reviewManager.complitionBlock = { answer in
                 switch answer {
                 case .yes:
-                    self.reviewManager.askForReview(parentVC: self)
+                    print("Ok")
                 case .no:
                     YULoyalty.instance.incrementLoyalty(weight: .dontLikeApp)
                 case .cancel:
                     YULoyalty.instance.incrementLoyalty(weight: .askLater)
                 }
             }
+            self.reviewManager.askForReview(parentVC: self)
             
         }
         YULoyalty.instance.syncCurrentStateBlock = { loyalty, level in
-            print("Sync Cyrrent Loyalty: \(loyalty) Level: \(level)")
+            // Save current loyalty point and current level in db or settings or something else here
+            print("Sync Cyrrent Loyalty: \(loyalty) Level: \(level.text)")
         }
     }
 

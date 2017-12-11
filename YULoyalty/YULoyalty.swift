@@ -12,14 +12,14 @@ final public class YULoyalty: NSObject {
     
     public typealias LoyaltyPoint = Int
     
-    @objc public enum Levels : LoyaltyPoint {
+    @objc public enum LoyaltyLevels : LoyaltyPoint {
         case starter = 0
         case newbie = 30
         case experienced = 80
         case fanatic = 150
     }
     
-    @objc public enum Weights : LoyaltyPoint {
+    @objc public enum LoyaltyWeights : LoyaltyPoint {
         case startApp = 1
         case bookmarkArticle = 3
         case unbookmarkArticle = 4
@@ -33,22 +33,22 @@ final public class YULoyalty: NSObject {
     private var currentLoyalty: LoyaltyPoint = 0 {
         
         didSet(oldLoyalty) {
-            var levelAchived = Levels.starter
-            if currentLoyalty >= Levels.newbie.rawValue && currentLevel.rawValue < Levels.newbie.rawValue {
-                levelAchived = Levels.newbie
+            var levelAchived = LoyaltyLevels.starter
+            if currentLoyalty >= LoyaltyLevels.newbie.rawValue && currentLevel.rawValue < LoyaltyLevels.newbie.rawValue {
+                levelAchived = LoyaltyLevels.newbie
             } else
-                if currentLoyalty >= Levels.experienced.rawValue && currentLevel.rawValue < Levels.experienced.rawValue {
-                    levelAchived = Levels.experienced
-                } else
-                    if currentLoyalty >= Levels.fanatic.rawValue {
-                        levelAchived = Levels.fanatic
+            if currentLoyalty >= LoyaltyLevels.experienced.rawValue && currentLevel.rawValue < LoyaltyLevels.experienced.rawValue {
+                levelAchived = LoyaltyLevels.experienced
+            } else
+            if currentLoyalty >= LoyaltyLevels.fanatic.rawValue {
+                levelAchived = LoyaltyLevels.fanatic
             }
             if (levelAchived != .starter) { self.currentLevel = levelAchived }
             guard let syncCurrentStateBlock = self.syncCurrentStateBlock else { return }
             syncCurrentStateBlock(currentLoyalty, currentLevel)
         }
     }
-    private var currentLevel: Levels = .starter {
+    private var currentLevel: LoyaltyLevels = .starter {
         didSet(oldLevel) {
             if currentLevel != oldLevel {
                 guard let levelAchievedBlock = self.levelAchievedBlock else { return }
@@ -57,15 +57,15 @@ final public class YULoyalty: NSObject {
             
         }
     }
-    @objc public var levelAchievedBlock: ((_ level:Levels) -> ())?
-    @objc public var syncCurrentStateBlock: ((_ loyalty:LoyaltyPoint, _ level:Levels) -> ())?
+    @objc public var levelAchievedBlock: ((_ level:LoyaltyLevels) -> ())?
+    @objc public var syncCurrentStateBlock: ((_ loyalty:LoyaltyPoint, _ level:LoyaltyLevels) -> ())?
     
-    @objc public func configure(currentLoyalty:LoyaltyPoint, currentLevel:Levels) {
+    @objc public func configure(currentLoyalty:LoyaltyPoint, currentLevel:LoyaltyLevels) {
         self.currentLoyalty = currentLoyalty
         self.currentLevel = currentLevel
     }
     
-    @objc public func incrementLoyalty(weight:Weights) {
+    @objc public func incrementLoyalty(weight:LoyaltyWeights) {
         self.currentLoyalty += weight.rawValue
     }
     
@@ -73,5 +73,25 @@ final public class YULoyalty: NSObject {
         return self.currentLoyalty
     }
     
+    @objc public func loyaltyLevelText(_ level:LoyaltyLevels) -> String {
+        return level.text
+    }
+    
 }
+
+public extension YULoyalty.LoyaltyLevels {
+    var text: String {
+        switch self {
+        case .starter:
+            return "starter"
+        case .newbie:
+            return "newbie"
+        case .experienced:
+            return "experienced"
+        case .fanatic:
+            return "fanatic"
+        }
+    }
+}
+
 
