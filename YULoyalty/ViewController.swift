@@ -14,10 +14,11 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        YULoyalty.instance.configure(currentLoyalty: 1, currentLevel: .starter)
+        let startLoyalty = 1
+        let startLevel:YULoyalty.LoyaltyLevels = .starter
+        YULoyalty.instance.configure(currentLoyalty: startLoyalty, currentLevel: startLevel)
         YULoyalty.instance.levelAchievedBlock = { level in
             print("Level Achived: \(level.text)")
-            // Save current loyalty point and current level in db or settings or something else here
             self.reviewManager.complitionBlock = { answer in
                 switch answer {
                 case .yes:
