@@ -34,15 +34,15 @@ Copy _YULoyalty.swift_ in project. For Objective-C needs to update _…-Bridging
     let startLevel:YULoyalty.LoyaltyLevels = .starter
     YULoyalty.instance.configure(currentLoyalty: startLoyalty, currentLevel: startLevel)
     // Configure level achieved callback
-	YULoyalty.instance.levelAchievedBlock = { level in
-	    print("Level Achived: \(level.text)")
-	    // Ask for review here
-	}
-	// Configure current loyalty incremented callback
-	YULoyalty.instance.syncCurrentStateBlock = { loyalty, level in
-		print("Sync Current Loyalty: \(loyalty) Level: \(level.text)")
-	    // Save current loyalty point and current level in DB or settings here
-	}
+    YULoyalty.instance.levelAchievedBlock = { level in
+    	print("Level Achived: \(level.text)")
+       // Ask for review here
+    }
+    // Configure current loyalty incremented callback
+    YULoyalty.instance.syncCurrentStateBlock = { loyalty, level in
+	print("Sync Current Loyalty: \(loyalty) Level: \(level.text)")
+        // Save current loyalty point and current level in DB or settings here
+    }
 ```
 
 ```Objective-C
