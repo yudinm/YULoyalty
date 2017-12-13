@@ -28,8 +28,8 @@ Copy _YULoyalty.swift_ in project. For Objective-C needs to update _…-Bridging
 
 #### Init and configure
 ```Swift
-
-	// Load startLoyalty and startLevel from DB or settings
+    /* Swift */
+    // Load startLoyalty and startLevel from DB or settings
     let startLoyalty = 1
     let startLevel:YULoyalty.LoyaltyLevels = .starter
     YULoyalty.instance.configure(currentLoyalty: startLoyalty, currentLevel: startLevel)
@@ -46,6 +46,7 @@ Copy _YULoyalty.swift_ in project. For Objective-C needs to update _…-Bridging
 ```
 
 ```Objective-C
+    /* Objective-C */
     NSInteger loyaltyCurrentLevel = LoyaltyLevelsStarter;
     NSInteger loyaltyCurrentPoints = 1;
     [[YULoyalty instance] configureWithCurrentLoyalty:loyaltyCurrentPoints currentLevel:loyaltyCurrentLevel];
@@ -61,6 +62,7 @@ Copy _YULoyalty.swift_ in project. For Objective-C needs to update _…-Bridging
 #### Usage
 
 ```Swift
+    /* Swift */
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         YULoyalty.instance.incrementLoyalty(weight: .startApp)
         return true
@@ -69,11 +71,12 @@ Copy _YULoyalty.swift_ in project. For Objective-C needs to update _…-Bridging
 ```
 
 ```Objective-C
-	- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-	{
-	    [[YULoyalty instance] incrementLoyaltyWithWeight:LoyaltyWeightsStartApp];
-	    return YES;
-	}
+    /* Objective-C */
+    - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+    {
+        [[YULoyalty instance] incrementLoyaltyWithWeight:LoyaltyWeightsStartApp];
+        return YES;
+    }
 ```
 
 ## TODO
